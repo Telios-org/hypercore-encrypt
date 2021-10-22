@@ -1,5 +1,6 @@
 const Hypercore = require('../..')
 const ram = require('random-access-memory')
+const sodium = require('sodium-native')
 
 module.exports = {
   async create(...args) {
@@ -19,5 +20,11 @@ module.exports = {
 
   async eventFlush() {
     await new Promise(resolve => setImmediate(resolve))
+  },
+
+  generateAEDKey() {
+    let k = Buffer.alloc(sodium.crypto_aead_xchacha20poly1305_ietf_KEYBYTES)
+    sodium.crypto_aead_xchacha20poly1305_ietf_keygen(k)
+    return k
   }
 }

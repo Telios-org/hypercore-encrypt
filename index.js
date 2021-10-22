@@ -6,17 +6,18 @@ const sodium = require('sodium-native')
 class HypercoreEncrypt extends Hypercore {
   constructor(storage, key, opts) {
     super(storage, key, opts)
-    this.encryption_key = this._generateAEDKey()
+
+    this.encryptionKey = !opts.encKey ? this._generateAEDKey() : opts.encKey
   }
 
   async get(index, opts) {
     if (this.opened === false) await this.opening
     const encoding = (opts && opts.valueEncoding && c.from(codecs(opts.valueEncoding))) || this.valueEncoding
 
-    if (this.core.bitfield.get(index)) return this._decode(encoding, await this.core.blocks.get(index), this.encryption_key)
+    if (this.core.bitfield.get(index)) return this._decode(encoding, await this.core.blocks.get(index), this.encryptionKey)
     if (opts && opts.onwait) opts.onwait(index)
 
-    return this._decode(encoding, await this.replicator.requestBlock(index), this.encryption_key)
+    return this._decode(encoding, await this.replicator.requestBlock(index), this.encryptionKey)
   }
 
   async append(blocks) {
@@ -27,10 +28,10 @@ class HypercoreEncrypt extends Hypercore {
     const buffers = new Array(blks.length)
 
     for (let i = 0; i < blks.length; i++) {
-      let buf = this._encrypt(blks[i], this.encryption_key)
+      let buf = this._encrypt(blks[i], this.encryptionKey)
 
       if (!Buffer.isBuffer(blks[i])) {
-        buf = this._encrypt(c.encode(this.valueEncoding, blks[i]).toString(), this.encryption_key)
+        buf = this._encrypt(c.encode(this.valueEncoding, blks[i]).toString(), this.encryptionKey)
       }
 
       buffers[i] = buf
