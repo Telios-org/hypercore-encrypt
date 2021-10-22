@@ -1,0 +1,31 @@
+{
+  "name": "hypercore-encrypt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "brittle tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Telios-org/hypercore-encrypt.git"
+  },
+  "author": "Hexadecibal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Telios-org/hypercore-encrypt/issues"
+  },
+  "homepage": "https://github.com/Telios-org/hypercore-encrypt#readme",
+  "dependencies": {
+    "codecs": "^2.2.0",
+    "compact-encoding": "^2.4.1",
+    "hypercore": "^10.0.0-alpha.2",
+    "sodium-native": "^3.3.0"
+  },
+  "devDependencies": {
+    "brittle": "^1.5.1",
+    "random-access-memory": "^3.1.2",
+    "standard": "^16.0.4",
+    "tmp-promise": "^3.0.2"
+  }
+}
