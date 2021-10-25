@@ -12,7 +12,7 @@ npm i hypercore-encrypt
 ``` js
 const Hypercore = require('hypercore-encrypt')
 
-const feed = new Hypercore('./my-encrypted-dataset', { encryptionKey: key, valueEncoding: 'json' })
+const feed = new Hypercore('./my-encrypted-dataset', null, { encryptionKey: key, valueEncoding: 'json' })
 
 await feed.ready()
 
@@ -31,12 +31,12 @@ Hypercore-encrypt mimics [Hypercore v10's](https://github.com/hypercore-protocol
 
 ```js
 // Initializing a new feed without an encryption key will automatically generate a new one
-const feed = new Hypercore('./my-encrypted-dataset', { valueEncoding: 'json' })
+const feed = new Hypercore('./my-encrypted-dataset', null, { valueEncoding: 'json' })
 
 const key = feed.encryptionKey.tostring('hex')
 
 // Initialize a new feed with an existing key
-const feed = new Hypercore('./my-encrypted-dataset', { encryptionKey: key, valueEncoding: 'json' })
+const feed = new Hypercore('./my-encrypted-dataset', null, { encryptionKey: key, valueEncoding: 'json' })
 
 ```
 

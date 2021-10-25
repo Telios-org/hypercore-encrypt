@@ -3,7 +3,7 @@ const { create } = require('./helpers')
 
 test('encrypt encodings - supports built ins', async function (t) {
   const a = await create(null, { valueEncoding: 'json' })
-  console.log(a.encryptionKey.toString('hex'))
+
   await a.append({ hello: 'world' })
   t.alike(await a.get(0), { hello: 'world' })
   t.is(await a.get(0, { valueEncoding: 'utf-8' }), '{"hello":"world"}')
