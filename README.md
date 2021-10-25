@@ -10,7 +10,7 @@ npm i hypercore-encrypt
 
 ## Usage
 ``` js
-const Hypercore = require('@telios/hypercore-encrypt')
+const Hypercore = require('hypercore-encrypt')
 
 const feed = new Hypercore('./my-encrypted-dataset', { encryptionKey: key, valueEncoding: 'json' })
 
