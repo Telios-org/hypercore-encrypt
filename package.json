@@ -1,6 +1,6 @@
 {
   "name": "hypercore-encrypt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hypercore encrypt enables block encryption for Hypercore v10 with authenticated encryption keys.",
   "main": "index.js",
   "scripts": {
