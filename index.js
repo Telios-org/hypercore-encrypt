@@ -9,6 +9,10 @@ class HypercoreEncrypt extends Hypercore {
 
     this.encryptionKey = !opts.encryptionKey ? this._generateAEDKey() : opts.encryptionKey
     this.skipFirstBlock = typeof opts.skipFirstBlock === 'boolean' ? opts.skipFirstBlock : true
+
+    if (!Buffer.isBuffer(this.encryptionKey)) {
+      this.encryptionKey = Buffer.from(this.encryptionKey, 'hex')
+    }
   }
 
   async get(index, opts) {

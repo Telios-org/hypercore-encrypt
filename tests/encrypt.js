@@ -31,7 +31,7 @@ test('replicate core with encryption key', async function (t) {
   const key = generateAEDKey();
 
   const a = await create(null, {
-    encryptionKey: key,
+    encryptionKey: key.toString('hex'),
     valueEncoding: 'json',
     skipFirstBlock: false
   })

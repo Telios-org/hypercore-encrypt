@@ -41,7 +41,7 @@ const feed = new Hypercore('./my-encrypted-dataset', null, { valueEncoding: 'jso
 const key = feed.encryptionKey.tostring('hex')
 
 // Initialize a new feed with an existing key
-const feed = new Hypercore('./my-encrypted-dataset', null, { encryptionKey: key, valueEncoding: 'json' })
+const feed = new Hypercore('./cloned-encrypted-dataset', feed.key, { encryptionKey: key, valueEncoding: 'json' })
 
 ```
 
