@@ -7,7 +7,7 @@ class HypercoreEncrypt extends Hypercore {
   constructor(storage, key, opts) {
     super(storage, key, opts)
 
-    this.encryptionKey = !opts.encKey ? this._generateAEDKey() : opts.encKey
+    this.encryptionKey = !opts.encryptionKey ? this._generateAEDKey() : opts.encryptionKey
   }
 
   async get(index, opts) {
