@@ -2,9 +2,9 @@
 
 Hypercore encrypt enables block encryption for [Hypercore v10](https://github.com/hypercore-protocol/hypercore) with authenticated encryption keys.
 
-<!-- ``` sh
-npm install @telios/hypercore-encrypt
-``` -->
+``` sh
+npm i hypercore-encrypt
+```
 
 ![Build Status](https://github.com/Telios-org/hypercore-encrypt/actions/workflows/test-node.yml/badge.svg)
 
