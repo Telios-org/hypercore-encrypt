@@ -58,11 +58,8 @@ class HypercoreEncrypt extends Hypercore {
 
   _encrypt(msg, key) {
     if (this.skipFirstBlock && this.length === 0) {
-      console.log(msg.toString())
       return msg
     }
-
-    // if (msg.toString().indexOf('hyperbee') > -1) return msg
 
     let m = typeof msg === 'object' && !Buffer.isBuffer(msg) ? Buffer.from(JSON.stringify(msg)) : Buffer.from(msg, 'utf-8')
 
