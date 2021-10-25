@@ -2,13 +2,19 @@ const test = require('brittle')
 const { create } = require('./helpers')
 
 test('encrypt encodings - supports built ins', async function (t) {
-  const a = await create(null, { valueEncoding: 'json' })
+  const a = await create(null, {
+    valueEncoding: 'json',
+    skipFirstBlock: false
+  })
 
   await a.append({ hello: 'world' })
   t.alike(await a.get(0), { hello: 'world' })
   t.is(await a.get(0, { valueEncoding: 'utf-8' }), '{"hello":"world"}')
 
-  const b = await create(null, { valueEncoding: 'utf-8' })
+  const b = await create(null, {
+    valueEncoding: 'utf-8',
+    skipFirstBlock: false
+  })
 
   await b.append('foo')
   await b.append('bar')
@@ -18,7 +24,10 @@ test('encrypt encodings - supports built ins', async function (t) {
 })
 
 test('encrypt encodings - supports custom encoding', async function (t) {
-  const a = await create(null, { valueEncoding: { encode() { return Buffer.from('foo') }, decode() { return 'bar' } } })
+  const a = await create(null, {
+    valueEncoding: { encode() { return Buffer.from('foo') }, decode() { return 'bar' } },
+    skipFirstBlock: false
+  })
 
   await a.append({ hello: 'world' })
 

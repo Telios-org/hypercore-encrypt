@@ -12,7 +12,11 @@ npm i hypercore-encrypt
 ``` js
 const Hypercore = require('hypercore-encrypt')
 
-const feed = new Hypercore('./my-encrypted-dataset', null, { encryptionKey: key, valueEncoding: 'json' })
+const feed = new Hypercore('./my-encrypted-dataset', null, { 
+  encryptionKey: key, 
+  valueEncoding: 'json',
+  skipFirstBlock: false // remove this option if the feed is being used in something like Hyperbee
+})
 
 await feed.ready()
 
@@ -25,7 +29,8 @@ Hypercore-encrypt mimics [Hypercore v10's](https://github.com/hypercore-protocol
 
 ``` js
 {
-  encryptionKey: key // All blocks will be encrypted and deciphered with this AEAD key
+  encryptionKey: key, // All blocks will be encrypted and deciphered with this AEAD key
+  skipFirstBlock: true // Skip encrypting the header block when using this in conjunction with something like Hyperbee
 }
 ```
 

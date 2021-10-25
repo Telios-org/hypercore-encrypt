@@ -4,10 +4,11 @@ const c = require('compact-encoding')
 const sodium = require('sodium-native')
 
 class HypercoreEncrypt extends Hypercore {
-  constructor(storage, key, opts) {
+  constructor(storage, key, opts = {}) {
     super(storage, key, opts)
 
     this.encryptionKey = !opts.encryptionKey ? this._generateAEDKey() : opts.encryptionKey
+    this.skipFirstBlock = typeof opts.skipFirstBlock === 'boolean' ? opts.skipFirstBlock : true
   }
 
   async get(index, opts) {
@@ -52,7 +53,14 @@ class HypercoreEncrypt extends Hypercore {
   }
 
   _encrypt(msg, key) {
-    let m = typeof msg === 'object' ? Buffer.from(JSON.stringify(msg)) : Buffer.from(msg, 'utf-8')
+    if (this.skipFirstBlock && this.length === 0) {
+      console.log(msg.toString())
+      return msg
+    }
+
+    // if (msg.toString().indexOf('hyperbee') > -1) return msg
+
+    let m = typeof msg === 'object' && !Buffer.isBuffer(msg) ? Buffer.from(JSON.stringify(msg)) : Buffer.from(msg, 'utf-8')
 
     let c = Buffer.alloc(m.length + sodium.crypto_aead_xchacha20poly1305_ietf_ABYTES)
     let nonce = Buffer.alloc(sodium.crypto_aead_xchacha20poly1305_ietf_NPUBBYTES)
